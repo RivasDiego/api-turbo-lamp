@@ -2,9 +2,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+require("./database/config");
+require("./auth/auth");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var userRouter = require("../backendAPI/routes/user");
+var wordRouter = require("../backendAPI/routes/word");
+var authRouter = require("../backendAPI/routes/auth");
 
 var app = express();
 
@@ -14,7 +17,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(authRouter);
+app.use("/users", userRouter);
+app.use("/words", wordRouter);
 
 module.exports = app;
