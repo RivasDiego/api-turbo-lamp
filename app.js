@@ -5,9 +5,10 @@ var logger = require('morgan');
 require("./database/config");
 require("./auth/auth");
 
-var userRouter = require("../backendAPI/routes/user");
-var wordRouter = require("../backendAPI/routes/word");
-var authRouter = require("../backendAPI/routes/auth");
+var userRouter = require("./routes/user");
+var wordRouter = require("./routes/word");
+var authRouter = require("./routes/auth");
+var errorHandler = require ("./utils/errorHandler");
 
 var app = express();
 
@@ -20,5 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(authRouter);
 app.use("/users", userRouter);
 app.use("/words", wordRouter);
+app.use(errorHandler);
 
 module.exports = app;
