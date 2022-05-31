@@ -6,6 +6,7 @@ mongoose
   .then(
     () => {
       debug("Database connected ");
+      console.log("Database connected ");
     },
     (err) => {
       debug("Error to connect to database %o", err);
